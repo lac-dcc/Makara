@@ -174,13 +174,6 @@ def modifyFile(file):
         switch_header = match_obj.group(1)
         switch_content = match_obj.group(2)
 
-        # 1) Primeiro, tentamos detectar a forma de atribuição:
-        #    <qualquer-declaração> <ident> = name(args);
-        # Capturamos:
-        #   g1 = indent
-        #   g2 = declaração à esquerda (tipo + nome + '=') por exemplo "unsigned int benchRet = "
-        #   g3 = chamada (name(args))
-        #   g4 = ponto-e-vírgula e espaços finais
         assignment_pattern = (
             rf"(^|\n)(\s*)([\w\*\s]+\b\w+\s*=\s*)({re.escape(name)}\s*\([^;)]*\))(\s*;)"
         )
@@ -192,8 +185,6 @@ def modifyFile(file):
             call_expr = m.group(4)  # ex: "rate_to_atmf(rate)"
             semicolon_ws = m.group(5)  # ex: "    ;" or just ";"
 
-            # Usamos __typeof__(call_expr) para deduzir o tipo de retorno.
-            # Construímos uma GCC statement expression: ({ setup; __typeof__(call_expr) __ret = call_expr; stop; results; __ret; })
             stmt_expr = (
                 f"({{ \n"
                 f"{str_setup}\n"
@@ -212,17 +203,13 @@ def modifyFile(file):
             )
 
             injection_status["found_function"] = True
-            # Reconstroi a linha: preservamos o leading newline e a indentação
             return f"{leading_newline}{indent}{left}{stmt_expr}{semicolon_ws}"
 
-        # Aplicar substituição de atribuição globalmente no switch_content
         (after_assignment, n_assign_subs) = re.subn(
             assignment_pattern, replace_assignment, switch_content, flags=re.DOTALL
         )
 
-        # 2) Se não encontramos atribuição, tentamos a forma simples de chamada (sem atribuição)
         if n_assign_subs == 0:
-            # padrão anterior: injetar antes e depois da chamada simples "name(...);"
             pattern_call = rf"(\s*)({re.escape(name)}\s*\([^)]*\)\s*;)"
             replacement_call = f"\\g<1>{str1}\\n\\g<1>\\g<2>\\n\\g<1>{str2}"
             (after_call, n_call_subs) = re.subn(
@@ -234,7 +221,6 @@ def modifyFile(file):
             else:
                 modified_content = switch_content
         else:
-            # já substituímos pela forma de atribuição
             modified_content = after_assignment
 
         return f"{switch_header}{modified_content}"

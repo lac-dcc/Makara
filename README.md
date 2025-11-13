@@ -4,13 +4,13 @@
 
 ## Goals
 
-The MAKARA project (Multi-Architecture Knowledge Analysis and Report Assessment) is designed to rigorously test the depth of understanding possessed by Large Language Models (LLMs) regarding the foundational principles of computer architecture. The primary goal is to determine if an LLM can effectively translate program execution behavior across different hardware environments. Specifically, the project challenges an LLM with a given program's source code and its corresponding performance counter metrics gathered from an initial architecture (Architecture A). The central objective is then to query the LLM to predict and project how those same performance counters would appear if the identical program were executed on a distinct target architecture (Architecture B). This cross-domain performance projection serves as a crucial metric for assessing the LLM's true architectural reasoning capabilities, moving beyond mere data pattern recognition to validate its grasp of the underlying hardware-software interaction principles. Thus, we created the Makara Data Pipeline, which can collect performance counters from your machine to implement our dataset. To participate in our dataset, run the following script and send your results in the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview 
+The MAKARA project (Multi-Architecture Knowledge Analysis and Report Assessment) is designed to rigorously test the depth of understanding possessed by Large Language Models (LLMs) regarding the foundational principles of computer architecture. The primary goal is to determine if an LLM can effectively translate program execution behavior across different hardware environments. Specifically, the project challenges an LLM with a given program's source code and its corresponding performance counter metrics gathered from an initial architecture (Architecture A). The central objective is then to query the LLM to predict and project how those same performance counters would appear if the identical program were executed on a distinct target architecture (Architecture B). This cross-domain performance projection serves as a crucial metric for assessing the LLM's true architectural reasoning capabilities, moving beyond mere data pattern recognition to validate its grasp of the underlying hardware-software interaction principles. Thus, we created the Makara Data Pipeline, which can collect performance counters from your machine to build our dataset. To contribute in our dataset, run the following script and submit your results via the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview 
 
 ---
 
 ## Overview
 
-Makara Data Pipeline automates the process of compiling, executing, and profiling programs using `perf`, aggregating the results into a structured dataset.  
+The Makara Data Pipeline automates the process of compiling, executing, and profiling programs using `perf`, aggregating the results into a structured dataset.  
 It supports distributed execution, making it suitable for large-scale performance analysis or research in compiler optimization and program behavior characterization.
 
 ---
@@ -21,7 +21,7 @@ Ensure the following dependencies are installed on all machines participating in
 
 - **GCC** – for compiling C/C++ programs
 - **Python 3.x** – for orchestration and automation
-- **Linux perf and distro** – for collecting performance metrics
+- **Linux perf** – for collecting performance metrics
 
 ---
 
@@ -41,7 +41,8 @@ You can test if perf is installed with
 ```bash
 perf --version
 ```
-For corretly use perf without any restrictions, please make sure to run the following command
+
+To correctly use perf without restrictions, please run the following command:
 
 ```bash
 sudo sysctl -w kernel.perf_event_paranoid=1     
@@ -56,6 +57,7 @@ To start the data collection process, simply execute:
 ```bash
 python3 collect_data.py
 ```
+*Note*: On a typical machine, such as an Intel i7 at 2.8 GHz, this script takes 5 up to 6 minutes to run.
 
 The Makara Data Pipeline will:
 
@@ -63,6 +65,7 @@ The Makara Data Pipeline will:
 2. Execute each one while recording performance statistics with `perf`;
 3. Store the results in a structured `results/` directory;
 4. Automatically compress the collected data into a `.zip` archive for easy sharing.
-5. Send your results in the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview.
+
+After create de `.zip` folder, please submit your results in the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview.
 
 ---

@@ -63,5 +63,6 @@ The Makara Data Pipeline will:
 2. Execute each one while recording performance statistics with `perf`;
 3. Store the results in a structured `results/` directory;
 4. Automatically compress the collected data into a `.zip` archive for easy sharing.
+5. Send your results in the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview.
 
 ---

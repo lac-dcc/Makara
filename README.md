@@ -4,7 +4,22 @@
 
 ## Goals
 
-The MAKARA project (Multi-Architecture Knowledge Analysis and Report Assessment) is designed to rigorously test the depth of understanding possessed by Large Language Models (LLMs) regarding the foundational principles of computer architecture. The primary goal is to determine if an LLM can effectively translate program execution behavior across different hardware environments. Specifically, the project challenges an LLM with a given program's source code and its corresponding performance counter metrics gathered from an initial architecture (Architecture A). The central objective is then to query the LLM to predict and project how those same performance counters would appear if the identical program were executed on a distinct target architecture (Architecture B). This cross-domain performance projection serves as a crucial metric for assessing the LLM's true architectural reasoning capabilities, moving beyond mere data pattern recognition to validate its grasp of the underlying hardware-software interaction principles. Thus, we created the Makara Data Pipeline, which can collect performance counters from your machine to build our dataset. To contribute in our dataset, run the following script and submit your results via the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview 
+The MAKARA project (Multi-Architecture Knowledge Analysis and Report Assessment) is designed to rigorously test the depth of understanding possessed by Large Language Models (LLMs) regarding the foundational principles of computer architecture. The primary goal is to determine if an LLM can effectively translate program execution behavior across different hardware environments. Specifically, the project challenges an LLM with a given program's source code and its corresponding performance counter metrics gathered from an initial architecture (Architecture A). The central objective is then to query the LLM to predict and project how those same performance counters would appear if the identical program were executed on a distinct target architecture (Architecture B). This cross-domain performance projection serves as a crucial metric for assessing the LLM's true architectural reasoning capabilities, moving beyond mere data pattern recognition to validate its grasp of the underlying hardware-software interaction principles.
+
+---
+
+## **Help Us Build a Global Performance Dataset!**
+
+We're building a collective dataset of **performance counters** and need your help! This dataset is a table that associates programs with their counters on particular architectures. By contributing, you'll help us create a robust resource for researchers worldwide. Besides, you will have access to the entire dataset!
+
+**Contributing is Easy:** We've created an automated script that handles everything:
+
+* It **downloads and compiles** our benchmark collection ([Makara/Jotai](https://github.com/lac-dcc/Makara/tree/main/Jotai)).
+* It **runs** benchmarks and efficiently **collects** performance counter values.
+* It **captures** system architecture details (CPU, caches, etc.).
+* It automatically **packages** all the results for easy submission.
+
+**Ready to contribute?** Just run the script (see instructions below) and send your data via this [Google Form](https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview). Running the script takes about five-six minutes on a standard machine.
 
 ---
 

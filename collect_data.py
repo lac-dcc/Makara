@@ -7,6 +7,7 @@ from inject_code import injection_pipeline
 def compilation_process(sources):
     errors = []
 
+    # Clean non-compilable files
     for program in sources:
         output_name = program.replace(".c", ".out")
         print(f"Compiling {program}...")
@@ -40,36 +41,10 @@ def compilation_process(sources):
 def main():
 
     start_time = time.time()
+    # Collect CPU data
     os.makedirs("results", exist_ok=True)
     os.makedirs("bin", exist_ok=True)
-    
-    try:
-        lscpu_result = subprocess.run(
-            ["lscpu"],
-            capture_output=True,  
-            text=True,            
-            check=True,           
-            encoding='utf-8'      
-        )
-        
-        all_lines = lscpu_result.stdout.splitlines()
-
-        filtered_lines = [
-            line for line in all_lines if not line.strip().startswith("Vulnerability")
-        ]
-
-        filtered_output = "\n".join(filtered_lines) + "\n"
-
-        with open("results/cpuinfo.txt", "w", encoding='utf-8') as f:
-            f.write(filtered_output)
-
-    except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        print(f"Data colletion failed, please send us your error: {e}")
-        with open("results/cpuinfo.txt", "w", encoding='utf-8') as f:
-            f.write(f"Data colletion failed, please send us your error: {e}\n")
-            
-            
-            
+    subprocess.run(["cat", "/proc/cpuinfo"], stdout=open("results/cpuinfo.txt", "w"))
     subprocess.run(["gcc", "--version"], stdout=open("results/gcc_version.txt", "w"))
 
     sources = os.listdir("ModifiedJotai")
@@ -78,19 +53,19 @@ def main():
     sources = os.listdir("bin")
     for output_name in sources:
         print(f"Running {output_name}...")
-        for _ in range(100):
-            try:
+        try:
+            for _ in range(100):
                 subprocess.run(
                     [f"./bin/{output_name}", "0"],
                     check=True,
                 )
-            except subprocess.CalledProcessError as e:
-                print(f"Failed to run the {output_name} : {e}")
-                continue
-        
+        except subprocess.CalledProcessError as e:
+            print(f"Failed to run the {output_name}: {e}")
+            continue
+
     with open("results/perf_results.csv", "r") as file:
         filedata = file.read()
-    
+
     filedata = filedata.replace("newline", "\n")
 
     with open("results/perf_results.csv", "w") as file:
@@ -102,5 +77,4 @@ def main():
 
 
 if __name__ == "__main__":
-    injection_pipeline()
     main()

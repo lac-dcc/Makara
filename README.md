@@ -25,7 +25,7 @@ By contributing, you'll help create a robust, open resource for researchers worl
 - It **captures** system architecture details (CPU, caches, etc.).
 - It automatically **packages** all the results for easy submission.
 
-**Ready to contribute?** Just run the script (see instructions below) and send your data via this [Google Form](https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview). Running the script takes about **five to six minutes** on a standard machine.
+**Ready to contribute?** Just run the script (see instructions below) and send your data via this [Google Form](https://forms.gle/7tL9eBhGUPJMRt6x6). Running the script takes about **five to six minutes** on a standard machine.
 
 ---
 
@@ -90,6 +90,6 @@ The Makara Data Pipeline will:
 3. Store the results in a structured `results/` directory;
 4. Automatically compress the collected data into a `.zip` archive for easy sharing.
 
-Once the `.zip` file is created, please submit your results via the form: https://docs.google.com/forms/d/1ADHlQ2LgZQ-MuuXVd_LyDQ2UDm77Bx1kBDIXt9bX81U/preview.
+Once the `.zip` file is created, please submit your results via the [Makara - Results Submission](forms.gle/7tL9eBhGUPJMRt6x6) form.
 
 ---

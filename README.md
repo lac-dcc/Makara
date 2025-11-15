@@ -90,6 +90,6 @@ The Makara Data Pipeline will:
 3. Store the results in a structured `results/` directory;
 4. Automatically compress the collected data into a `.zip` archive for easy sharing.
 
-Once the `.zip` file is created, please submit your results via the [Makara - Results Submission](forms.gle/7tL9eBhGUPJMRt6x6) form.
+Once the `.zip` file is created, please submit your results via the [Makara - Results Submission](https://forms.gle/7tL9eBhGUPJMRt6x6) form.
 
 ---
